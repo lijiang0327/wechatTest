@@ -15,16 +15,12 @@ var app = express();
 var router = express.Router();
 var apiRouter = express.Router();
 var server = http.createServer(app);
-// var wxpay = WPay({
-//     appid: '',
-//     mch_id: '',
-//     partner_key: '',
-//     pfx: fs.readFileSync('')
-// });
 
 var appid = 'wxd150e5f673fed7ae',
     secret = 'bfb07a92e1962d09f3fd1dd26cec458b',
     token = 'imeibao';
+
+var db = {};
 
 function authwechat(timestamp, nonce, sign) {
     var arr = [token, timestamp, nonce], arrStr;
@@ -98,21 +94,28 @@ router.get('/wechat/login', (req, res, next) => {
 });
 
 router.get('/wechat/login/watch', (req, res, next) => {
-    res.json({return_code: 'SUCCESS', return_msg: ''});
+    if (db['oSm_dwKm7dRSq0WWzdldE6SFo3Fo']) {
+        res.json({return_code: 'SUCCESS'});
+        return;
+    }
+    res.json({return_code: 'ERROR'});
 });
 
 router.use('/wechat/test', (req, res, next) => {
-    // var query = req.query,
-    //     timestamp = query.timestamp,
-    //     nonce = query.nonce,
-    //     sign = query.signature,
-    //     echostr = query.echostr;
-    // if (authwechat(timestamp, nonce, sign)) {
-    //     res.send(echostr);
-    // }
+    var query = req.query,
+        timestamp = query.timestamp,
+        nonce = query.nonce,
+        sign = query.signature,
+        echostr = query.echostr || '',
+        openid = query.openid || '';
 
-    console.log(req.query);
-    console.log(req.body);
+    if (!authwechat(timestamp, nonce, sign)) {
+        return;
+    }
+    if (openid) {
+        db.openid = true;
+        res.end('true');
+    }
 });
 
 server.listen(8888, '127.0.0.1', () => {

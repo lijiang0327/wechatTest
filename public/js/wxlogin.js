@@ -8,7 +8,9 @@
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+                if (data.return_code === 'SUCCESS') {
+                    location.href = '/';
+                }
             }
         })
     } 
