@@ -10,6 +10,7 @@ var request = require('request');
 var async = require('async');
 var bodyParser = require('body-parser');
 var sha1 = require('sha1');
+require('body-parser-xml')(bodyParser);
 
 var app = express();
 var router = express.Router();
@@ -38,7 +39,7 @@ app.set('view engine', 'tpl');
 // console.log(path.join(__dirname, 'templates'));
 app.set('views', path.join(__dirname, 'templates'));
 
-app.use(bodyParser.json());
+app.use(bodyParser.xml());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(router);
 app.use('/api', apiRouter);
@@ -104,6 +105,7 @@ router.get('/wechat/login/watch', (req, res, next) => {
 
 router.post('/wechat/test', (req, res, next) => {
     var query = req.query,
+        body = req.body,
         timestamp = query.timestamp,
         nonce = query.nonce,
         sign = query.signature,
@@ -111,7 +113,7 @@ router.post('/wechat/test', (req, res, next) => {
         openid = query.openid || '';
 
     console.log(query);
-    console.log(query.openid);
+    console.log(body);
     // if (!authwechat(timestamp, nonce, sign)) {
     //     return;
     // }
