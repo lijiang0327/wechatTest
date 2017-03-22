@@ -116,7 +116,7 @@ router.use('/wechat/test', (req, res, next) => {
     //     return;
     // }
     if (openid) {
-        db.openid = true;
+        db[openid] = true;
         res.end('true');
     }
 });
