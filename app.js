@@ -48,9 +48,8 @@ app.use(router);
 app.use('/api', apiRouter);
 
 router.get('/', (req, res, next) => {
-    fs.readFile('./index.html', (err, data) => {
-        res.status(200).end(data);
-    })
+    var list = [{name: '地三鲜'}, {name: '糖醋鱼块'}];
+    res.render('index', {list: list, listname: list[0].name});
 });
 
 router.get('/index', (req, res, next) => {
@@ -113,6 +112,6 @@ router.get('/wechat/test', (req, res, next) => {
     }
 });
 
-server.listen(3000, () => {
+server.listen(8888, '127.0.0.1', () => {
     console.log('server is running at port 3000...');
 });
