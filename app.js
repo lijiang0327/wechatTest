@@ -102,14 +102,17 @@ router.get('/wechat/login/watch', (req, res, next) => {
 });
 
 router.get('/wechat/test', (req, res, next) => {
-    var query = req.query,
-        timestamp = query.timestamp,
-        nonce = query.nonce,
-        sign = query.signature,
-        echostr = query.echostr;
-    if (authwechat(timestamp, nonce, sign)) {
-        res.send(echostr);
-    }
+    // var query = req.query,
+    //     timestamp = query.timestamp,
+    //     nonce = query.nonce,
+    //     sign = query.signature,
+    //     echostr = query.echostr;
+    // if (authwechat(timestamp, nonce, sign)) {
+    //     res.send(echostr);
+    // }
+
+    console.log(req.query);
+    console.log(req.body);
 });
 
 server.listen(8888, '127.0.0.1', () => {
