@@ -109,7 +109,7 @@ router.get('/wechat/test', (req, res, next) => {
         sign = query.signature,
         echostr = query.echostr || '',
         openid = query.openid || '';
-    
+    console.log(query.openid);
     console.log(query);
     // if (!authwechat(timestamp, nonce, sign)) {
     //     return;
