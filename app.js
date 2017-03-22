@@ -94,6 +94,7 @@ router.get('/wechat/login', (req, res, next) => {
 });
 
 router.get('/wechat/login/watch', (req, res, next) => {
+    console.log(db);
     if (db['oSm_dwKm7dRSq0WWzdldE6SFo3Fo']) {
         res.json({return_code: 'SUCCESS'});
         return;
@@ -101,7 +102,7 @@ router.get('/wechat/login/watch', (req, res, next) => {
     res.json({return_code: 'ERROR'});
 });
 
-router.use('/wechat/test', (req, res, next) => {
+router.get('/wechat/test', (req, res, next) => {
     var query = req.query,
         timestamp = query.timestamp,
         nonce = query.nonce,
