@@ -102,15 +102,16 @@ router.get('/wechat/login/watch', (req, res, next) => {
     res.json({return_code: 'ERROR'});
 });
 
-router.get('/wechat/test', (req, res, next) => {
+router.use('/wechat/test', (req, res, next) => {
     var query = req.query,
         timestamp = query.timestamp,
         nonce = query.nonce,
         sign = query.signature,
         echostr = query.echostr || '',
         openid = query.openid || '';
-    console.log(query.openid);
+
     console.log(query);
+    console.log(query.openid);
     // if (!authwechat(timestamp, nonce, sign)) {
     //     return;
     // }
