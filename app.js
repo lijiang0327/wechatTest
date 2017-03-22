@@ -97,6 +97,7 @@ router.get('/wechat/login/watch', (req, res, next) => {
     console.log(db);
     if (db['oSm_dwKm7dRSq0WWzdldE6SFo3Fo']) {
         res.json({return_code: 'SUCCESS'});
+        delete db['oSm_dwKm7dRSq0WWzdldE6SFo3Fo'];
         return;
     }
     res.json({return_code: 'ERROR'});
