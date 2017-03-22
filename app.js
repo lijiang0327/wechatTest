@@ -101,7 +101,7 @@ router.get('/wechat/login/watch', (req, res, next) => {
     res.json({return_code: 'SUCCESS', return_msg: ''});
 });
 
-router.get('/wechat/test', (req, res, next) => {
+router.use('/wechat/test', (req, res, next) => {
     // var query = req.query,
     //     timestamp = query.timestamp,
     //     nonce = query.nonce,
